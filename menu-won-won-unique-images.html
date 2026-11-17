@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu Won Won - 36 Ảnh Riêng Biệt & Tính Tiền Tự Động</title>
+  <style>
+    :root {
+      --primary: #d97706;
+      --primary-hover: #b45309;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --danger: #ef4444;
+      --danger-hover: #dc2626;
+      --success: #10b981;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    header {
+      background: var(--card);
+      padding: 20px 24px;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+      color: var(--primary);
+    }
+
+    header p {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+      align-items: center;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 220px;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      outline: none;
+    }
+    .search-box:focus { border-color: var(--primary); }
+
+    select, button {
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.15s;
+      font-weight: 500;
+    }
+
+    button:hover, select:hover { border-color: var(--primary); }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+    .btn-primary:hover { background: var(--primary-hover); }
+
+    .btn-danger {
+      background: #fee2e2;
+      color: var(--danger);
+      border-color: #fecaca;
+    }
+    .btn-danger:hover {
+      background: var(--danger);
+      color: white;
+    }
+
+    .categories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .cat-btn {
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+    }
+    .cat-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .main-grid { grid-template-columns: 1fr; }
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
+      gap: 16px;
+    }
+
+    .dish-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .dish-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      border-color: #cbd5e1;
+    }
+
+    .dish-img-wrap {
+      position: relative;
+      width: 100%;
+      height: 155px;
+      background: #f1f5f9;
+      overflow: hidden;
+    }
+
+    .dish-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .dish-card:hover .dish-img {
+      transform: scale(1.05);
+    }
+
+    .dish-tag {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #1e293b;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(4px);
+      padding: 3px 9px;
+      border-radius: 6px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+
+    .dish-body {
+      padding: 14px 16px 16px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .dish-name {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .dish-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .dish-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+      padding-top: 10px;
+      border-top: 1px dashed var(--border);
+    }
+
+    .dish-price {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1.05rem;
+    }
+
+    .add-btn {
+      background: #fef3c7;
+      color: var(--primary-hover);
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+    .add-btn:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* Cart Panel */
+    .cart-panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      position: sticky;
+      top: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .cart-panel.hidden { display: none; }
+
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 14px;
+    }
+
+    .cart-header h2 { font-size: 1.15rem; }
+
+    .cart-items {
+      max-height: 400px;
+      overflow-y: auto;
+      margin-bottom: 16px;
+    }
+
+    .cart-empty {
+      text-align: center;
+      color: var(--muted);
+      padding: 30px 0;
+      font-size: 0.9rem;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .cart-item-thumb {
+      width: 44px;
+      height: 44px;
+      border-radius: 6px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: #f1f5f9;
+    }
+
+    .cart-item-info { flex: 1; min-width: 0; }
+    .cart-item-title { font-weight: 600; font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .cart-item-price { font-size: 0.82rem; color: var(--muted); }
+
+    .qty-controls {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .qty-btn {
+      width: 26px;
+      height: 26px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+
+    .remove-btn {
+      background: none;
+      border: none;
+      color: var(--danger);
+      padding: 4px 6px;
+      font-size: 0.85rem;
+    }
+    .remove-btn:hover { text-decoration: underline; }
+
+    .cart-summary {
+      background: #f8fafc;
+      padding: 14px;
+      border-radius: 8px;
+      margin-bottom: 14px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      font-size: 0.92rem;
+    }
+
+    .summary-total {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--primary);
+      border-top: 1px solid var(--border);
+      padding-top: 8px;
+      margin-top: 8px;
+    }
+
+    .cart-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #1e293b;
+      color: white;
+      padding: 12px 18px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+      z-index: 100;
+    }
+    .toast.show { opacity: 1; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div>
+      <h1>🍱 Won Won · Menu & Tính Tiền</h1>
+      <p>Vincom · Freeship · 36 món với 36 ảnh minh họa riêng biệt</p>
+    </div>
+    <div style="display: flex; gap: 10px;">
+      <button id="toggleCartBtn" class="btn-primary">🛒 Giỏ hàng (<span id="topCartCount">0</span>)</button>
+    </div>
+  </header>
+
+  <div class="toolbar">
+    <input type="text" id="searchInput" class="search-box" placeholder="🔍 Tìm món ăn (có dấu hoặc không dấu)..." />
+    <select id="sortSelect" aria-label="Sắp xếp món">
+      <option value="default">Sắp xếp: Mặc định</option>
+      <option value="price-asc">Giá: Thấp → Cao</option>
+      <option value="price-desc">Giá: Cao → Thấp</option>
+      <option value="name-asc">Tên: A → Z</option>
+      <option value="name-desc">Tên: Z → A</option>
+    </select>
+    <button id="resetFilterBtn">🔄 Reset bộ lọc</button>
+    <button id="clearCartTopBtn" class="btn-danger">🗑️ Xóa giỏ hàng</button>
+  </div>
+
+  <div class="categories" id="categoryContainer"></div>
+
+  <div class="main-grid" id="mainGrid">
+    <div class="menu-grid" id="menuGrid"></div>
+
+    <aside class="cart-panel" id="cartPanel">
+      <div class="cart-header">
+        <h2>🧾 Đơn hàng của bạn</h2>
+        <button id="closeCartBtn" style="padding: 4px 10px; font-size: 0.8rem;">Ẩn</button>
+      </div>
+      <div class="cart-items" id="cartItems">
+        <div class="cart-empty">Chưa có món nào được chọn.</div>
+      </div>
+      <div class="cart-summary">
+        <div class="summary-row">
+          <span>Tổng số lượng:</span>
+          <strong id="totalQty">0 suất</strong>
+        </div>
+        <div class="summary-row">
+          <span>Phí ship:</span>
+          <strong style="color: var(--success);">0đ (Freeship)</strong>
+        </div>
+        <div class="summary-total">
+          <span>Tổng cộng:</span>
+          <span id="totalPrice">0đ</span>
+        </div>
+      </div>
+      <div class="cart-actions">
+        <button id="clearCartBtn" class="btn-danger">Xóa hết món</button>
+        <button id="copyOrderBtn" class="btn-primary">📋 Copy đơn</button>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<div class="toast" id="toast">Đã sao chép đơn hàng!</div>
+
+<script>
+  const makeFallbackSvg = (emoji, bg1, bg2, label) => {
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="260" viewBox="0 0 400 260">
+      <defs>
+        <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="${bg1}"/>
+          <stop offset="100%" stop-color="${bg2}"/>
+        </linearGradient>
+      </defs>
+      <rect width="400" height="260" fill="url(#g)"/>
+      <circle cx="200" cy="108" r="62" fill="rgba(255,255,255,0.25)"/>
+      <text x="200" y="130" font-size="68" text-anchor="middle">${emoji}</text>
+      <text x="200" y="216" font-family="sans-serif" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">${label}</text>
+    </svg>`;
+    return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
+  };
+
+  // 36 URL ảnh Unsplash hoàn toàn khác nhau cho 36 món trong menu
+  const MENU_DATA = [
+    // 1. GÀ (7 món - 7 ảnh khác nhau)
+    {
+      id: 1, category: "Gà", name: "Gà signature", price: 99000,
+      img: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("🍗", "#f59e0b", "#b45309", "Gà signature")
+    },
+    {
+      id: 2, category: "Gà", name: "Gà sốt cay ngọt", price: 119000,
+      img: "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("🌶️🍗", "#ef4444", "#991b1b", "Gà sốt cay ngọt")
+    },
+    {
+      id: 3, category: "Gà", name: "Gà sốt tương tỏi", price: 119000,
+      img: "https://images.unsplash.com/photo-1527477396000-e27163b481c2?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("🧄🍗", "#d97706", "#78350f", "Gà sốt tương tỏi")
+    },
+    {
+      id: 4, category: "Gà", name: "Gà sốt kem hành", price: 119000,
+      img: "https://images.unsplash.com/photo-1608039755401-742074f0548d?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("🧅🍗", "#65a30d", "#365314", "Gà sốt kem hành")
+    },
+    {
+      id: 5, category: "Gà", name: "Gà sốt mật ong", price: 119000,
+      img: "https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("🍯🍗", "#eab308", "#854d0e", "Gà sốt mật ong")
+    },
+    {
+      id: 6, category: "Gà", name: "Gà sốt phô mai", price: 119000,
+      img: "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("🧀🍗", "#f97316", "#9a3412", "Gà sốt phô mai")
+    },
+    {
+      id: 7, category: "Gà", name: "Gà lắc phô mai", price: 119000,
+      img: "https://images.unsplash.com/photo-1513639776629-7b61b0ac49cb?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("✨🍗", "#ca8a04", "#713f12", "Gà lắc phô mai")
+    },
+
+    // 2. MÌ, MIẾN (6 món - 6 ảnh khác nhau)
+    {
+      id: 8, category: "Mì, miến", name: "Mì tương đen", price: 59000,
+      img: "https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("🍜", "#334155", "#0f172a", "Mì tương đen")
+    },
+    {
+      id: 9, category: "Mì, miến", name: "Thịt lợn chua ngọt · size M", price: 69000,
+      img: "https://images.unsplash.com/photo-1525755662778-989d0524087e?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("🍖", "#ea580c", "#9a3412", "Thịt lợn chua ngọt M")
+    },
+    {
+      id: 10, category: "Mì, miến", name: "Thịt lợn chua ngọt · size L", price: 89000,
+      img: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("🥩", "#c2410c", "#7c2d12", "Thịt lợn chua ngọt L")
+    },
+    {
+      id: 11, category: "Mì, miến", name: "Mì cay bò", price: 49000,
+      img: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("🍲", "#dc2626", "#7f1d1d", "Mì cay bò")
+    },
+    {
+      id: 12, category: "Mì, miến", name: "Mì cay VIP", price: 75000,
+      img: "https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("🔥🍜", "#b91c1c", "#450a0a", "Mì cay VIP")
+    },
+    {
+      id: 13, category: "Mì, miến", name: "Miến trộn thịt bò", price: 55000,
+      img: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("🍝", "#d97706", "#78350f", "Miến trộn thịt bò")
+    },
+
+    // 3. KIMBAP (4 món - 4 ảnh khác nhau)
+    {
+      id: 14, category: "Kimbap", name: "Kimbap xúc xích", price: 35000,
+      img: "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("🍙", "#059669", "#064e3b", "Kimbap xúc xích")
+    },
+    {
+      id: 15, category: "Kimbap", name: "Kimbap gà chiên", price: 39000,
+      img: "https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("🍣", "#10b981", "#065f46", "Kimbap gà chiên")
+    },
+    {
+      id: 16, category: "Kimbap", name: "Kimbap thịt bò xào", price: 45000,
+      img: "https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("🥩🍙", "#0d9488", "#134e4a", "Kimbap thịt bò xào")
+    },
+    {
+      id: 17, category: "Kimbap", name: "Kimbap heo chiên", price: 45000,
+      img: "https://images.unsplash.com/photo-1611143669185-af224c5e3252?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("🥓🍙", "#16a34a", "#14532d", "Kimbap heo chiên")
+    },
+
+    // 4. CƠM TRỘN (3 món - 3 ảnh khác nhau)
+    {
+      id: 18, category: "Cơm trộn", name: "Cơm trộn gà mắm tỏi", price: 55000,
+      img: "https://images.unsplash.com/photo-1553163147-622ab57be1c7?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("🍚🍗", "#e11d48", "#881337", "Cơm trộn gà mắm tỏi")
+    },
+    {
+      id: 19, category: "Cơm trộn", name: "Cơm trộn heo chiên", price: 55000,
+      img: "https://images.unsplash.com/photo-1590301157890-4810ed352733?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("🍚🥓", "#db2777", "#831843", "Cơm trộn heo chiên")
+    },
+    {
+      id: 20, category: "Cơm trộn", name: "Cơm trộn thịt bò", price: 49000,
+      img: "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("🍚🥩", "#be123c", "#4c0519", "Cơm trộn thịt bò")
+    },
+
+    // 5. MÓN ĂN VẶT (6 món - 6 ảnh khác nhau)
+    {
+      id: 21, category: "Món ăn vặt", name: "Tokbokki", price: 45000,
+      img: "https://images.unsplash.com/photo-1635363638580-c2809d049eee?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("🍢", "#f43f5e", "#9f1239", "Tokbokki")
+    },
+    {
+      id: 22, category: "Món ăn vặt", name: "Tokbokki rose", price: 59000,
+      img: "https://images.unsplash.com/photo-1580651315530-69c8e0026377?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("🍥", "#fb7185", "#be123c", "Tokbokki rose")
+    },
+    {
+      id: 23, category: "Món ăn vặt", name: "Tokbokki chiên lắc phô mai", price: 39000,
+      img: "https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("🧀🍢", "#f59e0b", "#b45309", "Tokbokki chiên phô mai")
+    },
+    {
+      id: 24, category: "Món ăn vặt", name: "Nem chua rán đặc biệt", price: 55000,
+      img: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("🌭", "#f97316", "#9a3412", "Nem chua rán")
+    },
+    {
+      id: 25, category: "Món ăn vặt", name: "Khoai tây chiên", price: 39000,
+      img: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("🍟", "#eab308", "#854d0e", "Khoai tây chiên")
+    },
+    {
+      id: 26, category: "Món ăn vặt", name: "Khoai tây chiên lắc phô mai", price: 45000,
+      img: "https://images.unsplash.com/photo-1585109649139-366815a0d713?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("🧀🍟", "#d97706", "#78350f", "Khoai chiên phô mai")
+    },
+
+    // 6. ĐỒ UỐNG (2 món - 2 ảnh khác nhau)
+    {
+      id: 27, category: "Đồ uống", name: "Coca", price: 15000,
+      img: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("🥤", "#dc2626", "#450a0a", "Coca")
+    },
+    {
+      id: 28, category: "Đồ uống", name: "Nước lọc", price: 10000,
+      img: "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("💧", "#0284c7", "#0c4a6e", "Nước lọc")
+    },
+
+    // 7. COMBO NHÂN VIÊN (8 món - 8 ảnh hoàn toàn khác nhau)
+    {
+      id: 29, category: "Combo nhân viên", name: "Combo cơm trộn heo chiên", note: "Kèm sâm dứa, dưa hấu, củ đậu", price: 60000,
+      img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("🍱🥓", "#16a34a", "#14532d", "Combo cơm heo chiên")
+    },
+    {
+      id: 30, category: "Combo nhân viên", name: "Combo cơm trộn bò xào", note: "Kèm sâm dứa, dưa hấu, củ đậu", price: 60000,
+      img: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("🍱🥩", "#15803d", "#052e16", "Combo cơm bò xào")
+    },
+    {
+      id: 31, category: "Combo nhân viên", name: "Combo cơm trộn gà mắm tỏi", note: "Kèm sâm dứa, dưa hấu, củ đậu", price: 60000,
+      img: "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("🍱🧄", "#0d9488", "#115e59", "Combo cơm gà mắm tỏi")
+    },
+    {
+      id: 32, category: "Combo nhân viên", name: "Combo cơm trộn gà chiên", note: "Kèm sâm dứa, dưa hấu, củ đậu", price: 60000,
+      img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("🍱🍗", "#059669", "#064e3b", "Combo cơm gà chiên")
+    },
+    {
+      id: 33, category: "Combo nhân viên", name: "Combo kimbap bò xào", note: "Kèm sâm dứa, dưa hấu, củ đậu", price: 60000,
+      img: "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("🍙🥩", "#0284c7", "#075985", "Combo kimbap bò xào")
+    },
+    {
+      id: 34, category: "Combo nhân viên", name: "Combo kimbap xúc xích", note: "Kèm sâm dứa, dưa hấu, củ đậu", price: 60000,
+      img: "https://images.unsplash.com/photo-1607301406259-dfb186e15de8?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("🍙🌭", "#2563eb", "#1e3a8a", "Combo kimbap xúc xích")
+    },
+    {
+      id: 35, category: "Combo nhân viên", name: "Combo kimbap heo chiên", note: "Kèm sâm dứa, dưa hấu, củ đậu", price: 60000,
+      img: "https://images.unsplash.com/photo-1583623025817-d180a2221d0a?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("🍙🥓", "#4f46e5", "#312e81", "Combo kimbap heo chiên")
+    },
+    {
+      id: 36, category: "Combo nhân viên", name: "Combo kimbap gà chiên", note: "Kèm sâm dứa, dưa hấu, củ đậu", price: 60000,
+      img: "https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=500&q=75",
+      fallback: makeFallbackSvg("🍙🍗", "#7c3aed", "#4c1d95", "Combo kimbap gà chiên")
+    }
+  ];
+
+  let selectedCategory = "Tất cả";
+  let searchQuery = "";
+  let sortOrder = "default";
+  let cart = JSON.parse(localStorage.getItem("wonwon_cart") || "{}");
+
+  const formatMoney = (num) => num.toLocaleString("vi-VN") + "đ";
+
+  const removeAccents = (str) =>
+    str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+  function showToast(msg) {
+    const toast = document.getElementById("toast");
+    toast.textContent = msg;
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 2200);
+  }
+
+  function saveCart() {
+    localStorage.setItem("wonwon_cart", JSON.stringify(cart));
+  }
+
+  function renderCategories() {
+    const categories = ["Tất cả", ...new Set(MENU_DATA.map((item) => item.category))];
+    const container = document.getElementById("categoryContainer");
+    container.innerHTML = categories
+      .map(
+        (cat) => `
+        <button class="cat-btn ${cat === selectedCategory ? "active" : ""}" onclick="setCategory('${cat}')">
+          ${cat}
+        </button>`
+      )
+      .join("");
+  }
+
+  function setCategory(cat) {
+    selectedCategory = cat;
+    renderCategories();
+    renderMenu();
+  }
+
+  function renderMenu() {
+    let filtered = MENU_DATA.filter((item) => {
+      const matchCat = selectedCategory === "Tất cả" || item.category === selectedCategory;
+      const matchSearch = removeAccents(item.name).includes(removeAccents(searchQuery));
+      return matchCat && matchSearch;
+    });
+
+    if (sortOrder === "price-asc") filtered.sort((a, b) => a.price - b.price);
+    else if (sortOrder === "price-desc") filtered.sort((a, b) => b.price - a.price);
+    else if (sortOrder === "name-asc") filtered.sort((a, b) => a.name.localeCompare(b.name, "vi"));
+    else if (sortOrder === "name-desc") filtered.sort((a, b) => b.name.localeCompare(a.name, "vi"));
+
+    const grid = document.getElementById("menuGrid");
+    if (filtered.length === 0) {
+      grid.innerHTML = `<p style="color: var(--muted); grid-column: 1/-1; text-align: center; padding: 40px;">Không tìm thấy món phù hợp.</p>`;
+      return;
+    }
+
+    grid.innerHTML = filtered
+      .map(
+        (item) => `
+        <div class="dish-card">
+          <div class="dish-img-wrap">
+            <img class="dish-img" src="${item.img}" alt="${item.name}" loading="lazy" onerror="this.onerror=null;this.src='${item.fallback}';" />
+            <span class="dish-tag">${item.category}</span>
+          </div>
+          <div class="dish-body">
+            <div class="dish-name">${item.name}</div>
+            ${item.note ? `<div class="dish-note">${item.note}</div>` : ""}
+            <div class="dish-footer">
+              <span class="dish-price">${formatMoney(item.price)}</span>
+              <button class="add-btn" onclick="addToCart(${item.id})">+ Thêm</button>
+            </div>
+          </div>
+        </div>`
+      )
+      .join("");
+  }
+
+  function addToCart(id) {
+    cart[id] = (cart[id] || 0) + 1;
+    saveCart();
+    renderCart();
+    const item = MENU_DATA.find((d) => d.id === id);
+    showToast(`Đã thêm: ${item.name}`);
+  }
+
+  function changeQty(id, delta) {
+    if (!cart[id]) return;
+    cart[id] += delta;
+    if (cart[id] <= 0) delete cart[id];
+    saveCart();
+    renderCart();
+  }
+
+  function removeItem(id) {
+    delete cart[id];
+    saveCart();
+    renderCart();
+  }
+
+  function clearCart() {
+    if (Object.keys(cart).length === 0) return;
+    cart = {};
+    saveCart();
+    renderCart();
+    showToast("Đã xóa toàn bộ giỏ hàng");
+  }
+
+  function renderCart() {
+    const cartContainer = document.getElementById("cartItems");
+    const entries = Object.entries(cart);
+    let totalQty = 0;
+    let totalPrice = 0;
+
+    if (entries.length === 0) {
+      cartContainer.innerHTML = `<div class="cart-empty">Chưa có món nào được chọn.</div>`;
+    } else {
+      cartContainer.innerHTML = entries
+        .map(([id, qty]) => {
+          const item = MENU_DATA.find((d) => d.id === Number(id));
+          if (!item) return "";
+          const subtotal = item.price * qty;
+          totalQty += qty;
+          totalPrice += subtotal;
+          return `
+            <div class="cart-item">
+              <img class="cart-item-thumb" src="${item.img}" alt="${item.name}" onerror="this.onerror=null;this.src='${item.fallback}';" />
+              <div class="cart-item-info">
+                <div class="cart-item-title" title="${item.name}">${item.name}</div>
+                <div class="cart-item-price">${formatMoney(item.price)} × ${qty} = <strong>${formatMoney(subtotal)}</strong></div>
+              </div>
+              <div class="qty-controls">
+                <button class="qty-btn" onclick="changeQty(${item.id}, -1)">-</button>
+                <span style="min-width: 18px; text-align: center; font-weight: 600;">${qty}</span>
+                <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+                <button class="remove-btn" onclick="removeItem(${item.id})" title="Bỏ món">✕</button>
+              </div>
+            </div>`;
+        })
+        .join("");
+    }
+
+    document.getElementById("totalQty").textContent = `${totalQty} suất`;
+    document.getElementById("totalPrice").textContent = formatMoney(totalPrice);
+    document.getElementById("topCartCount").textContent = totalQty;
+  }
+
+  // Event Listeners
+  document.getElementById("searchInput").addEventListener("input", (e) => {
+    searchQuery = e.target.value;
+    renderMenu();
+  });
+
+  document.getElementById("sortSelect").addEventListener("change", (e) => {
+    sortOrder = e.target.value;
+    renderMenu();
+  });
+
+  document.getElementById("resetFilterBtn").addEventListener("click", () => {
+    selectedCategory = "Tất cả";
+    searchQuery = "";
+    sortOrder = "default";
+    document.getElementById("searchInput").value = "";
+    document.getElementById("sortSelect").value = "default";
+    renderCategories();
+    renderMenu();
+    showToast("Đã đặt lại bộ lọc & sắp xếp");
+  });
+
+  document.getElementById("clearCartBtn").addEventListener("click", clearCart);
+  document.getElementById("clearCartTopBtn").addEventListener("click", clearCart);
+
+  document.getElementById("toggleCartBtn").addEventListener("click", () => {
+    const panel = document.getElementById("cartPanel");
+    const grid = document.getElementById("mainGrid");
+    panel.classList.toggle("hidden");
+    grid.style.gridTemplateColumns = panel.classList.contains("hidden") ? "1fr" : "";
+  });
+
+  document.getElementById("closeCartBtn").addEventListener("click", () => {
+    const panel = document.getElementById("cartPanel");
+    const grid = document.getElementById("mainGrid");
+    panel.classList.add("hidden");
+    grid.style.gridTemplateColumns = "1fr";
+  });
+
+  document.getElementById("copyOrderBtn").addEventListener("click", () => {
+    const entries = Object.entries(cart);
+    if (entries.length === 0) {
+      showToast("Giỏ hàng đang trống!");
+      return;
+    }
+    let total = 0;
+    const lines = entries.map(([id, qty]) => {
+      const item = MENU_DATA.find((d) => d.id === Number(id));
+      const sub = item.price * qty;
+      total += sub;
+      return `- ${qty}x ${item.name}: ${formatMoney(sub)}`;
+    });
+    const text = `Đơn Won Won:\n${lines.join("\n")}\nTổng cộng: ${formatMoney(total)}`;
+    navigator.clipboard.writeText(text).then(() => showToast("Đã copy đơn hàng vào clipboard!"));
+  });
+
+  // Init
+  renderCategories();
+  renderMenu();
+  renderCart();
+</script>
+</body>
+</html>
