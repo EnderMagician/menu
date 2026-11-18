@@ -450,7 +450,7 @@
     .dish-img-wrap {
       position: relative;
       width: 100%;
-      height: 168px;
+      aspect-ratio: 5 / 4;
       background: #F5F5F4;
       overflow: hidden;
       border-bottom: 1px solid var(--border);
@@ -996,7 +996,7 @@
       return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
     };
 
-    // 46 MÓN CHÍNH THỨC WON WON — MỖI MÓN ĐÃ ĐƯỢC SOÁT LẠI ẢNH ĐÚNG CHỦ ĐỀ MÓN ĂN & KHÔNG TRÙNG LẶP
+    // 46 MÓN CHÍNH THỨC WON WON — ẢNH THẬT TỪ SHOPEEFOOD WON WON / CÔ HAN, ẢNH COMBO CHUẨN MÓN & BỘ COMBO NHÂN VIÊN KÈM SÂM DỨA, DƯA HẤU, CỦ ĐẬU
     const MENU_DATA = [
       // ================= MENU COMBO CHÍNH THỨC (10 COMBO) =================
       {
@@ -1009,8 +1009,8 @@
         bestSeller: true,
         price: 119000,
         items: ["Mì tương đen", "Thịt lợn chua ngọt (size M)"],
-        // Ảnh mì tương đen Hàn Quốc Jajangmyeon
-        img: "https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=600&q=80",
+        // Ảnh chính thức Won Won trên ShopeeFood
+        img: "./images/combo-101-signature-1.jpg",
         fallback: makeIllustratedSvg("COMBO SIGNATURE 1", "Mì tương đen + Thịt lợn chua ngọt (M)", "🍜🍖", "#B81D24", "#7F1D1D")
       },
       {
@@ -1023,8 +1023,8 @@
         bestSeller: false,
         price: 129000,
         items: ["Gà signature", "Mì tương đen"],
-        // Ảnh gà rán Hàn Quốc giòn vàng
-        img: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=600&q=80",
+        // Gà signature giòn + Mì tương đen
+        img: "./images/combo-102-signature-2.jpg",
         fallback: makeIllustratedSvg("COMBO SIGNATURE 2", "Gà signature + Mì tương đen", "🍗🍜", "#C2410C", "#7C2D12")
       },
       {
@@ -1037,8 +1037,8 @@
         bestSeller: false,
         price: 199000,
         items: ["Mì tương đen", "Thịt lợn chua ngọt (size L)", "Mì cay VIP"],
-        // Ảnh mì cay Hàn Quốc tô lớn đầy topping
-        img: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=600&q=80",
+        // Mì tương đen + Thịt chua ngọt + Mì cay VIP
+        img: "./images/combo-103-huyen-thoai.jpg",
         fallback: makeIllustratedSvg("COMBO HUYỀN THOẠI", "Mì tương đen + Thịt chua ngọt (L) + Mì cay VIP", "🍲🍜", "#DC2626", "#991B1B")
       },
       {
@@ -1051,8 +1051,8 @@
         bestSeller: false,
         price: 199000,
         items: ["Mì cay bò xúc xích", "Mì tương đen", "Gà sốt"],
-        // Ảnh gà rán phủ sốt Hàn Quốc
-        img: "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?auto=format&fit=crop&w=600&q=80",
+        // Mì cay bò xúc xích + Mì tương đen + Gà sốt
+        img: "./images/combo-104-ban-than.jpg",
         fallback: makeIllustratedSvg("COMBO BẠN THÂN", "Mì cay bò xúc xích + Mì tương đen + Gà sốt", "🌶️🍗", "#D97706", "#92400E")
       },
       {
@@ -1065,8 +1065,8 @@
         bestSeller: false,
         price: 259000,
         items: ["Kimbap xúc xích", "Thịt lợn chua ngọt (size M)", "Gà sốt", "Mì tương đen"],
-        // Ảnh mẹt cơm cuộn kimbap Hàn Quốc
-        img: "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=600&q=80",
+        // Kimbap xúc xích + Thịt chua ngọt + Gà sốt + Mì tương đen
+        img: "./images/combo-105-no-ne.jpg",
         fallback: makeIllustratedSvg("COMBO NO NÊ", "Kimbap + Thịt chua ngọt + Gà sốt + Mì tương đen", "🍙🍗", "#B45309", "#78350F")
       },
       {
@@ -1079,8 +1079,8 @@
         bestSeller: false,
         price: 249000,
         items: ["Mì tương đen", "Thịt lợn chua ngọt (size M)", "Nem chua rán", "Khoai tây chiên", "Tokbokki chiên lắc phô mai"],
-        // Ảnh Tokbokki sốt cay Hàn Quốc
-        img: "https://images.unsplash.com/photo-1635363638580-c2809d049eee?auto=format&fit=crop&w=600&q=80",
+        // Mì tương đen + Thịt chua ngọt + Nem chua rán + Khoai tây chiên + Tokbokki chiên lắc phô mai
+        img: "./images/combo-106-vui-ve.jpg",
         fallback: makeIllustratedSvg("COMBO VUI VẺ", "5 món ăn vặt & mì Hàn Quốc cho nhóm 3-4 người", "🍢🍟", "#E11D48", "#881337")
       },
       {
@@ -1093,8 +1093,8 @@
         bestSeller: true,
         price: 279000,
         items: ["Kimbap xúc xích", "Cơm trộn heo chiên", "Gà signature", "Nem chua rán", "Mì tương đen"],
-        // Ảnh thố cơm trộn Hàn Quốc Bibimbap đầy đặn
-        img: "https://images.unsplash.com/photo-1553163147-622ab57be1c7?auto=format&fit=crop&w=600&q=80",
+        // Ảnh chính thức Won Won trên ShopeeFood
+        img: "./images/combo-107-gia-dinh.jpg",
         fallback: makeIllustratedSvg("COMBO GIA ĐÌNH", "Kimbap + Cơm trộn + Gà + Nem chua + Mì tương đen", "🍚🍗", "#B81D24", "#7F1D1D")
       },
       {
@@ -1107,8 +1107,8 @@
         bestSeller: true,
         price: 289000,
         items: ["Mì tương đen", "Thịt lợn chua ngọt (size M)", "Mì cay VIP", "Gà sốt"],
-        // Ảnh mì ramen cay Hàn Quốc trứng lòng đào
-        img: "https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&w=600&q=80",
+        // Mì tương đen + Thịt chua ngọt + Mì cay VIP + Gà sốt
+        img: "./images/combo-108-thom-them.jpg",
         fallback: makeIllustratedSvg("COMBO THÒM THÈM", "Mì tương đen + Thịt chua ngọt + Mì cay VIP + Gà sốt", "🔥🍗", "#991B1B", "#450A0A")
       },
       {
@@ -1121,8 +1121,8 @@
         bestSeller: true,
         price: 359000,
         items: ["Mì tương đen", "Miến trộn thịt bò", "Thịt lợn chua ngọt (size L)", "Mì cay VIP", "Gà sốt"],
-        // Ảnh bàn tiệc đồ ăn Hàn Quốc nhiều món
-        img: "https://images.unsplash.com/photo-1498654896293-37aacf113fd9?auto=format&fit=crop&w=600&q=80",
+        // Đại tiệc 5 món đặc trưng Won Won
+        img: "./images/combo-109-trai-nghiem.jpg",
         fallback: makeIllustratedSvg("COMBO TRẢI NGHIỆM", "Đại tiệc 5 món đặc trưng Won Won (4-5 người)", "🎉🍜", "#B81D24", "#881337")
       },
       {
@@ -1135,233 +1135,211 @@
         bestSeller: false,
         price: 389000,
         items: ["Mì tương đen", "Mì cay VIP", "Gà signature", "Kimbap thịt bò xào", "Cơm trộn gà mắm tỏi", "Thịt lợn chua ngọt (size L)"],
-        // Ảnh mâm cơm Hàn Quốc banchan & món chính
-        img: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=600&q=80",
+        // Đại tiệc 6 món VIP
+        img: "./images/combo-110-vip.jpg",
         fallback: makeIllustratedSvg("COMBO VIP 6 MÓN", "Đại tiệc đầy đủ Gà, Mì, Kimbap, Cơm trộn (4-5 người)", "👑🍱", "#9A3412", "#431407")
       },
 
       // ================= MENU MÓN LẺ CHÍNH THỨC (36 MÓN) =================
-      // 1. GÀ (7 món - Toàn bộ là ảnh GÀ RÁN / CÁNH GÀ / ĐÙI GÀ)
+      // 1. GÀ (7 món - Ảnh chính thức Won Won & Cô Han ShopeeFood)
       {
         id: 1, section: "single", category: "Gà", name: "Gà signature", en: "Signature Fried Chicken", price: 99000,
-        // Gà rán giòn truyền thống
-        img: "https://images.unsplash.com/photo-1513639776629-7b61b0ac49cb?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-01-ga-signature.jpg",
         fallback: makeIllustratedSvg("GÀ SIGNATURE", "Signature Fried Chicken · Giòn rụm nguyên bản", "🍗", "#D97706", "#78350F")
       },
       {
         id: 2, section: "single", category: "Gà", name: "Gà sốt cay ngọt", en: "Sweet & Spicy Chicken", price: 119000,
-        // Cánh gà rán phủ sốt đỏ cay ngọt Yangnyeom
-        img: "https://images.unsplash.com/photo-1527477396000-e27163b481c2?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-02-ga-sot-cay-ngot.jpg",
         fallback: makeIllustratedSvg("GÀ SỐT CAY NGỌT", "Sweet & Spicy Korean Fried Chicken", "🌶️🍗", "#DC2626", "#7F1D1D")
       },
       {
         id: 3, section: "single", category: "Gà", name: "Gà sốt tương tỏi", en: "Soy Garlic Chicken", price: 119000,
-        // Cánh gà rán sốt xì dầu tỏi bóng bẩy
-        img: "https://images.unsplash.com/photo-1608039755401-742074f0548d?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-03-ga-sot-tuong-toi.jpg",
         fallback: makeIllustratedSvg("GÀ SỐT TƯƠNG TỎI", "Soy Garlic Chicken · Đậm đà thơm tỏi", "🧄🍗", "#92400E", "#451A03")
       },
       {
         id: 4, section: "single", category: "Gà", name: "Gà sốt kem hành", en: "Creamy Green Onion Chicken", price: 119000,
-        // Gà rán rắc hành lá tươi và sốt kem
-        img: "https://images.unsplash.com/photo-1615557960916-5f4791effe9d?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-04-ga-sot-kem-hanh.jpg",
         fallback: makeIllustratedSvg("GÀ SỐT KEM HÀNH", "Creamy Green Onion Chicken", "🧅🍗", "#4D7C0F", "#1A2E05")
       },
       {
         id: 5, section: "single", category: "Gà", name: "Gà sốt mật ong", en: "Honey Chicken", price: 119000,
-        // Gà rán sốt mật ong vàng óng
-        img: "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-05-ga-sot-mat-ong.jpg",
         fallback: makeIllustratedSvg("GÀ SỐT MẬT ONG", "Honey Glazed Fried Chicken", "🍯🍗", "#EAB308", "#854D0E")
       },
       {
         id: 6, section: "single", category: "Gà", name: "Gà sốt phô mai", en: "Cheese Sauce Chicken", price: 119000,
-        // Gà rán chấm/phủ sốt phô mai vàng béo
-        img: "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-06-ga-sot-pho-mai.jpg",
         fallback: makeIllustratedSvg("GÀ SỐT PHÔ MAI", "Cheese Sauce Korean Chicken", "🧀🍗", "#F59E0B", "#9A3412")
       },
       {
         id: 7, section: "single", category: "Gà", name: "Gà lắc phô mai", en: "Cheese Shake Chicken", price: 119000,
-        // Gà rán miếng giòn lắc bột phô mai
-        img: "https://images.unsplash.com/photo-1606755962773-d324e0a13086?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-07-ga-lac-pho-mai.jpg",
         fallback: makeIllustratedSvg("GÀ LẮC PHÔ MAI", "Cheese Shake Crispy Chicken", "✨🍗", "#CA8A04", "#713F12")
       },
 
-      // 2. MÌ, MIẾN (6 món - Mì tương đen, Thịt chua ngọt, Mì cay, Miến trộn)
+      // 2. MÌ, MIẾN (6 món - Ảnh chính thức Won Won ShopeeFood)
       {
         id: 8, section: "single", category: "Mì, miến", name: "Mì tương đen", en: "Jajangmyeon / Black Bean Noodles", price: 59000,
-        // Tô mì tương đen dưa chuột sợi
-        img: "https://images.unsplash.com/photo-1617093727343-374698b1b08d?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-08-mi-tuong-den.jpg",
         fallback: makeIllustratedSvg("MÌ TƯƠNG ĐEN", "Jajangmyeon · Black Bean Noodles", "🍜", "#292524", "#0C0A09")
       },
       {
         id: 9, section: "single", category: "Mì, miến", name: "Thịt lợn chua ngọt (size M)", en: "Sweet & Sour Pork (size M)", price: 69000,
-        // Đĩa thịt lợn chiên giòn sốt chua ngọt kiểu Á
-        img: "https://images.unsplash.com/photo-1525755662778-989d0524087e?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-09-thit-lon-chua-ngot-m.jpg",
         fallback: makeIllustratedSvg("THỊT LỢN CHUA NGỌT (M)", "Tangsuyuk · Sweet & Sour Pork (M)", "🍖", "#EA580C", "#7C2D12")
       },
       {
         id: 10, section: "single", category: "Mì, miến", name: "Thịt lợn chua ngọt (size L)", en: "Sweet & Sour Pork (size L)", price: 89000,
-        // Đĩa thịt sốt chua ngọt phần lớn
-        img: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-10-thit-lon-chua-ngot-l.jpg",
         fallback: makeIllustratedSvg("THỊT LỢN CHUA NGỌT (L)", "Tangsuyuk · Sweet & Sour Pork (L)", "🥩", "#C2410C", "#431407")
       },
       {
         id: 11, section: "single", category: "Mì, miến", name: "Mì cay bò", en: "Spicy Beef Noodles", price: 49000,
-        // Tô mì nước cay màu đỏ cam với thịt bò
-        img: "https://images.unsplash.com/photo-1591814468924-caf88d1232e1?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-11-mi-cay-bo.jpg",
         fallback: makeIllustratedSvg("MÌ CAY BÒ", "Spicy Korean Beef Noodles", "🍲", "#DC2626", "#7F1D1D")
       },
       {
         id: 12, section: "single", category: "Mì, miến", name: "Mì cay VIP", en: "Spicy Noodles VIP", price: 75000,
-        // Tô mì cay hải sản / topping VIP
-        img: "https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-12-mi-cay-vip.jpg",
         fallback: makeIllustratedSvg("MÌ CAY VIP", "Spicy Seafood & Beef Noodles VIP", "🔥🍜", "#991B1B", "#450A0A")
       },
       {
         id: 13, section: "single", category: "Mì, miến", name: "Miến trộn thịt bò", en: "Stir-fried Glass Noodles with Beef", price: 55000,
-        // Đĩa miến xào / mì xào thịt bò rau củ
-        img: "https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-13-mien-tron-thit-bo.jpg",
         fallback: makeIllustratedSvg("MIẾN TRỘN THỊT BÒ", "Japchae · Stir-fried Glass Noodles with Beef", "🍝", "#B45309", "#451A03")
       },
 
-      // 3. KIMBAP (4 món - Đều là ảnh CƠM CUỘN RONG BIỂN)
+      // 3. KIMBAP (4 món - Ảnh chính thức Won Won ShopeeFood)
       {
         id: 14, section: "single", category: "Kimbap", name: "Kimbap xúc xích", en: "Sausage Kimbap", price: 35000,
-        img: "https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-14-kimbap-xuc-xich.jpg",
         fallback: makeIllustratedSvg("KIMBAP XÚC XÍCH", "Sausage Korean Seaweed Rice Roll", "🍙", "#15803D", "#052E16")
       },
       {
         id: 15, section: "single", category: "Kimbap", name: "Kimbap gà chiên", en: "Fried Chicken Kimbap", price: 39000,
-        img: "https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-15-kimbap-ga-chien.jpg",
         fallback: makeIllustratedSvg("KIMBAP GÀ CHIÊN", "Crispy Fried Chicken Kimbap", "🍣", "#047857", "#064E3B")
       },
       {
         id: 16, section: "single", category: "Kimbap", name: "Kimbap thịt bò xào", en: "Stir-fried Beef Kimbap", price: 45000,
-        img: "https://images.unsplash.com/photo-1611143669185-af224c5e3252?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-16-kimbap-thit-bo-xao.jpg",
         fallback: makeIllustratedSvg("KIMBAP THỊT BÒ XÀO", "Bulgogi Stir-fried Beef Kimbap", "🥩🍙", "#0F766E", "#134E4A")
       },
       {
         id: 17, section: "single", category: "Kimbap", name: "Kimbap heo chiên", en: "Fried Pork Kimbap", price: 45000,
-        img: "https://images.unsplash.com/photo-1583623025817-d180a2221d0a?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-17-kimbap-heo-chien.jpg",
         fallback: makeIllustratedSvg("KIMBAP HEO CHIÊN", "Tonkatsu Fried Pork Kimbap", "🥓🍙", "#166534", "#052E16")
       },
 
-      // 4. CƠM TRỘN (3 món - Đều là ảnh THỐ / BÁT CƠM TRỘN THỊT)
+      // 4. CƠM TRỘN (3 món - Ảnh chính thức Won Won ShopeeFood)
       {
         id: 18, section: "single", category: "Cơm trộn", name: "Cơm trộn gà mắm tỏi", en: "Garlic Soy Chicken Rice Bowl", price: 55000,
-        img: "https://images.unsplash.com/photo-1590301157890-4810ed352733?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-18-com-tron-ga-mam-toi.jpg",
         fallback: makeIllustratedSvg("CƠM TRỘN GÀ MẮM TỎI", "Garlic Soy Chicken Rice Bowl", "🍚🍗", "#BE123C", "#4C0519")
       },
       {
         id: 19, section: "single", category: "Cơm trộn", name: "Cơm trộn heo chiên", en: "Fried Pork Rice Bowl", price: 55000,
-        img: "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-19-com-tron-heo-chien.jpg",
         fallback: makeIllustratedSvg("CƠM TRỘN HEO CHIÊN", "Crispy Fried Pork Rice Bowl", "🍚🥓", "#9F1239", "#4C0519")
       },
       {
         id: 20, section: "single", category: "Cơm trộn", name: "Cơm trộn thịt bò", en: "Beef Rice Bowl", price: 49000,
-        img: "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-20-com-tron-thit-bo.jpg",
         fallback: makeIllustratedSvg("CƠM TRỘN THỊT BÒ", "Korean Beef Bibimbap Rice Bowl", "🍚🥩", "#881337", "#3B0712")
       },
 
-      // 5. MÓN ĂN VẶT (6 món - Tokbokki, Nem chua rán, Khoai tây chiên)
+      // 5. MÓN ĂN VẶT (6 món - Ảnh chính thức Won Won ShopeeFood)
       {
         id: 21, section: "single", category: "Món ăn vặt", name: "Tokbokki", en: "Korean Rice Cakes", price: 45000,
-        img: "https://images.unsplash.com/photo-1580651315530-69c8e0026377?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-21-tokbokki.jpg",
         fallback: makeIllustratedSvg("TOKBOKKI", "Spicy Korean Rice Cakes", "🍢", "#E11D48", "#881337")
       },
       {
         id: 22, section: "single", category: "Món ăn vặt", name: "Tokbokki rose", en: "Rose Tteokbokki", price: 59000,
-        img: "https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-22-tokbokki-rose.jpg",
         fallback: makeIllustratedSvg("TOKBOKKI ROSE", "Creamy Spicy Rose Tteokbokki", "🍥", "#F43F5E", "#9F1239")
       },
       {
         id: 23, section: "single", category: "Món ăn vặt", name: "Tokbokki chiên lắc phô mai", en: "Cheese Shake Fried Tteokbokki", price: 39000,
-        img: "https://images.unsplash.com/photo-1625937286074-9ca519d5d9df?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-23-tokbokki-chien-lac-pho-mai.jpg",
         fallback: makeIllustratedSvg("TOKBOKKI CHIÊN PHÔ MAI", "Cheese Shake Fried Tteokbokki", "🧀🍢", "#D97706", "#78350F")
       },
       {
         id: 24, section: "single", category: "Món ăn vặt", name: "Nem chua rán đặc biệt", en: "Special Fried Fermented Pork Roll", price: 55000,
-        // Ảnh nem rán / chả giò chiên giòn vàng rụm trên đĩa
-        img: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-24-nem-chua-ran-dac-biet.jpg",
         fallback: makeIllustratedSvg("NEM CHUA RÁN ĐẶC BIỆT", "Special Fried Fermented Pork Roll", "🌭", "#EA580C", "#7C2D12")
       },
       {
         id: 25, section: "single", category: "Món ăn vặt", name: "Khoai tây chiên", en: "French Fries", price: 39000,
-        img: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-25-khoai-tay-chien.jpg",
         fallback: makeIllustratedSvg("KHOAI TÂY CHIÊN", "Crispy Golden French Fries", "🍟", "#EAB308", "#854D0E")
       },
       {
         id: 26, section: "single", category: "Món ăn vặt", name: "Khoai tây chiên lắc phô mai", en: "Cheese Shake French Fries", price: 45000,
-        img: "https://images.unsplash.com/photo-1585109649139-366815a0d713?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-26-khoai-tay-chien-lac-pho-mai.jpg",
         fallback: makeIllustratedSvg("KHOAI CHIÊN LẮC PHÔ MAI", "Cheese Shake French Fries", "🧀🍟", "#CA8A04", "#713F12")
       },
 
-      // 6. ĐỒ UỐNG (2 món)
+      // 6. ĐỒ UỐNG (2 món - Ảnh chính thức Won Won ShopeeFood)
       {
         id: 27, section: "single", category: "Đồ uống", name: "Coca", en: "Coca Cola", price: 15000,
-        img: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-27-coca.jpg",
         fallback: makeIllustratedSvg("COCA COLA", "Coca Cola Mát Lạnh", "🥤", "#DC2626", "#450A0A")
       },
       {
         id: 28, section: "single", category: "Đồ uống", name: "Nước lọc", en: "Bottled Water", price: 10000,
-        img: "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-28-nuoc-loc.jpg",
         fallback: makeIllustratedSvg("NƯỚC LỌC", "Bottled Mineral Water", "💧", "#0284C7", "#0C4A6E")
       },
 
-      // 7. COMBO NHÂN VIÊN (8 suất: 4 suất Cơm trộn + 4 suất Kimbap — đúng ảnh Cơm & Kimbap, tuyệt đối không dùng ảnh pizza/bít tết)
+      // 7. COMBO NHÂN VIÊN (8 suất: Món chính Won Won + sâm dứa, dưa hấu, củ đậu)
       {
         id: 29, section: "single", category: "Combo nhân viên", name: "Combo cơm trộn heo chiên", en: "Staff Set · Fried Pork Rice + Drink & Dessert",
         note: "Kèm sâm dứa, dưa hấu, củ đậu", price: 60000,
-        // Ảnh bát cơm thịt chiên kiểu Á
-        img: "https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-29-combo-com-tron-heo-chien.jpg",
         fallback: makeIllustratedSvg("COMBO CƠM HEO CHIÊN", "Kèm sâm dứa, dưa hấu, củ đậu", "🍱🥓", "#15803D", "#052E16")
       },
       {
         id: 30, section: "single", category: "Combo nhân viên", name: "Combo cơm trộn bò xào", en: "Staff Set · Stir-fried Beef Rice + Drink & Dessert",
         note: "Kèm sâm dứa, dưa hấu, củ đậu", price: 60000,
-        // Ảnh cơm trộn bò trứng Hàn Quốc
-        img: "https://images.unsplash.com/photo-1584278860047-22db9ff82bed?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-30-combo-com-tron-bo-xao.jpg",
         fallback: makeIllustratedSvg("COMBO CƠM BÒ XÀO", "Kèm sâm dứa, dưa hấu, củ đậu", "🍱🥩", "#166534", "#052E16")
       },
       {
         id: 31, section: "single", category: "Combo nhân viên", name: "Combo cơm trộn gà mắm tỏi", en: "Staff Set · Garlic Soy Chicken Rice + Drink & Dessert",
         note: "Kèm sâm dứa, dưa hấu, củ đậu", price: 60000,
-        // Ảnh bát cơm gà teriyaki / gà sốt kiểu Á
-        img: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-31-combo-com-tron-ga-mam-toi.jpg",
         fallback: makeIllustratedSvg("COMBO CƠM GÀ MẮM TỎI", "Kèm sâm dứa, dưa hấu, củ đậu", "🍱🧄", "#0D9488", "#115E59")
       },
       {
         id: 32, section: "single", category: "Combo nhân viên", name: "Combo cơm trộn gà chiên", en: "Staff Set · Fried Chicken Rice + Drink & Dessert",
         note: "Kèm sâm dứa, dưa hấu, củ đậu", price: 60000,
-        // Ảnh hộp cơm bento gà chiên
-        img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-32-combo-com-tron-ga-chien.jpg",
         fallback: makeIllustratedSvg("COMBO CƠM GÀ CHIÊN", "Kèm sâm dứa, dưa hấu, củ đậu", "🍱🍗", "#059669", "#064E3B")
       },
       {
         id: 33, section: "single", category: "Combo nhân viên", name: "Combo kimbap bò xào", en: "Staff Set · Beef Kimbap + Drink & Dessert",
         note: "Kèm sâm dứa, dưa hấu, củ đậu", price: 60000,
-        // Ảnh đĩa cơm cuộn rong biển cắt khoanh
-        img: "https://images.unsplash.com/photo-1607301406259-dfb186e15de8?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-33-combo-kimbap-bo-xao.jpg",
         fallback: makeIllustratedSvg("COMBO KIMBAP BÒ XÀO", "Kèm sâm dứa, dưa hấu, củ đậu", "🍙🥩", "#0284C7", "#075985")
       },
       {
         id: 34, section: "single", category: "Combo nhân viên", name: "Combo kimbap xúc xích", en: "Staff Set · Sausage Kimbap + Drink & Dessert",
         note: "Kèm sâm dứa, dưa hấu, củ đậu", price: 60000,
-        // Ảnh cuộn cơm rong biển Hàn Quốc
-        img: "https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-34-combo-kimbap-xuc-xich.jpg",
         fallback: makeIllustratedSvg("COMBO KIMBAP XÚC XÍCH", "Kèm sâm dứa, dưa hấu, củ đậu", "🍙🌭", "#2563EB", "#1E3A8A")
       },
       {
         id: 35, section: "single", category: "Combo nhân viên", name: "Combo kimbap heo chiên", en: "Staff Set · Fried Pork Kimbap + Drink & Dessert",
         note: "Kèm sâm dứa, dưa hấu, củ đậu", price: 60000,
-        // Ảnh khay cơm cuộn rong biển nhiều nhân
-        img: "https://images.unsplash.com/photo-1562802378-063ec186a863?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-35-combo-kimbap-heo-chien.jpg",
         fallback: makeIllustratedSvg("COMBO KIMBAP HEO CHIÊN", "Kèm sâm dứa, dưa hấu, củ đậu", "🍙🥓", "#4F46E5", "#312E81")
       },
       {
         id: 36, section: "single", category: "Combo nhân viên", name: "Combo kimbap gà chiên", en: "Staff Set · Fried Chicken Kimbap + Drink & Dessert",
         note: "Kèm sâm dứa, dưa hấu, củ đậu", price: 60000,
-        // Ảnh cuộn cơm rong biển chiên giòn
-        img: "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=600&q=80",
+        img: "./images/dish-36-combo-kimbap-ga-chien.jpg",
         fallback: makeIllustratedSvg("COMBO KIMBAP GÀ CHIÊN", "Kèm sâm dứa, dưa hấu, củ đậu", "🍙🍗", "#7C3AED", "#4C1D95")
       }
     ];
