@@ -2,13 +2,168 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="refresh" content="0; url=./won-won-official-menu-v2.html" />
-  <title>Menu Won Won</title>
-  <script>
-    window.location.replace("./won-won-official-menu-v2.html");
-  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ocean Park 1 · Food Hub</title>
+  <meta name="description" content="Danh bạ thực đơn &amp; đặt món nhóm tại Vincom Mega Mall Ocean Park 1." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-  <p>Đang chuyển hướng tới <a href="./won-won-official-menu-v2.html">Menu Won Won</a>...</p>
+  <!-- ==================== MINIMAL TOPBAR ==================== -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="topbar-left">
+        <button class="brand-btn" id="brandHomeBtn" title="Về trang chủ">
+          <span class="brand-dot" aria-hidden="true">🍽️</span>
+          <strong>Ocean Park 1</strong>
+        </button>
+
+        <button class="switcher-trigger" id="switcherTriggerBtn" title="Chọn nhanh quán (Ctrl+K)">
+          <span id="switcherLabel">Chọn quán</span>
+          <span class="chevron">▾</span>
+        </button>
+      </div>
+
+      <div class="search-wrap">
+        <input
+          type="text"
+          id="globalSearchInput"
+          class="search-input"
+          placeholder="Tìm quán hoặc món... (/)"
+          autocomplete="off"
+        />
+        <button class="clear-x" id="globalSearchClear" aria-label="Xóa tìm kiếm">✕</button>
+      </div>
+
+      <button class="cart-btn" id="openCartBtn">
+        <span>Phiếu</span>
+        <span class="cart-badge" id="topCartCount">0</span>
+        <span class="cart-btn-total" id="topCartTotal">0đ</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==================== WORKSPACE: MAIN + STICKY ORDER PANEL ==================== -->
+  <div class="workspace" id="workspace">
+    <main class="page" id="mainContent" aria-live="polite"></main>
+
+    <aside class="cart-drawer" id="cartDrawer" aria-label="Phiếu order nhóm">
+      <div class="cart-head">
+        <div class="cart-head-left">
+          <h2>Phiếu Order</h2>
+          <span class="muted" id="cartSubMeta">0 suất</span>
+        </div>
+        <button class="link-btn" id="closeCartBtn" aria-label="Ẩn phiếu">Ẩn</button>
+      </div>
+
+      <div class="cart-body" id="cartBody"></div>
+
+      <div class="cart-foot">
+        <input
+          type="text"
+          id="cartNoteInput"
+          class="field-input"
+          placeholder="Ghi chú đơn (VD: Ít cay, giao 11h45...)"
+        />
+
+        <!-- VOUCHER WIDGET: 10k & 50k steppers + manual input -->
+        <div class="voucher-box">
+          <div class="voucher-head">
+            <span>🎟️ Voucher</span>
+            <div class="voucher-head-right">
+              <span class="voucher-val" id="voucherActiveVal">0đ</span>
+              <button class="link-btn" id="resetVoucherBtn" hidden>Xóa</button>
+            </div>
+          </div>
+
+          <div class="voucher-steppers">
+            <div class="v-stepper">
+              <span class="v-denom">10k</span>
+              <div class="v-ctrl">
+                <button type="button" class="v-btn" data-v-denom="10000" data-v-delta="-1" aria-label="Giảm voucher 10k">−</button>
+                <span class="v-qty" id="vQty10">0</span>
+                <button type="button" class="v-btn" data-v-denom="10000" data-v-delta="1" aria-label="Tăng voucher 10k">+</button>
+              </div>
+            </div>
+
+            <div class="v-stepper">
+              <span class="v-denom">50k</span>
+              <div class="v-ctrl">
+                <button type="button" class="v-btn" data-v-denom="50000" data-v-delta="-1" aria-label="Giảm voucher 50k">−</button>
+                <span class="v-qty" id="vQty50">0</span>
+                <button type="button" class="v-btn" data-v-denom="50000" data-v-delta="1" aria-label="Tăng voucher 50k">+</button>
+              </div>
+            </div>
+          </div>
+
+          <input
+            type="text"
+            inputmode="numeric"
+            id="voucherManualInput"
+            class="voucher-manual"
+            placeholder="Hoặc nhập tay số tiền voucher (VD: 70000)"
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="summary-block">
+          <div class="summary-line">
+            <span>Tạm tính</span>
+            <span id="cartSubtotalPrice">0đ</span>
+          </div>
+          <div class="summary-line is-discount" id="cartDiscountRow" hidden>
+            <span id="cartDiscountLabel">Giảm Voucher</span>
+            <span id="cartDiscountDisplay">-0đ</span>
+          </div>
+          <div class="summary-total">
+            <span>Thanh toán</span>
+            <strong id="cartTotalPrice">0đ</strong>
+          </div>
+        </div>
+
+        <div class="cart-actions">
+          <button class="btn-outline" id="clearCartBtn">Xóa hết</button>
+          <button class="btn-primary" id="copyBillBtn">Copy Bill Gửi Nhóm</button>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- ==================== FLOATING CART PILL (MOBILE) ==================== -->
+  <button class="floating-cart-pill" id="floatingCartPill" hidden>
+    <span>🧾 <strong id="fcCount">0</strong> suất · <span id="fcRests">0</span> quán</span>
+    <span><strong id="fcTotal">0đ</strong> · Mở phiếu →</span>
+  </button>
+
+  <!-- ==================== QUICK RESTAURANT SWITCHER MODAL (FOR 40+ QUÁN) ==================== -->
+  <div class="modal-overlay" id="switcherModal" hidden>
+    <div class="switcher-dialog" role="dialog" aria-modal="true" aria-label="Chọn nhanh gian hàng">
+      <div class="switcher-head">
+        <input
+          type="text"
+          id="switcherSearchInput"
+          class="switcher-search"
+          placeholder="Gõ tên quán để chuyển nhanh..."
+          autocomplete="off"
+        />
+        <button class="icon-close" id="closeSwitcherBtn" aria-label="Đóng">✕</button>
+      </div>
+      <div class="switcher-tabs">
+        <button class="sw-tab active" data-sw-tab="all">Tất cả</button>
+        <button class="sw-tab" data-sw-tab="ready">Đã có menu</button>
+        <button class="sw-tab" data-sw-tab="pinned">★ Đã ghim</button>
+      </div>
+      <div class="switcher-list" id="switcherList"></div>
+    </div>
+  </div>
+
+  <div class="drawer-backdrop" id="cartBackdrop" hidden></div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="./data/restaurants.js"></script>
+  <script src="./app.js"></script>
 </body>
 </html>
